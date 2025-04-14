@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-// import { IconsModule } from '../../core/modules/icons.module';
+import { ArrowLeft, LucideAngularModule } from 'lucide-angular';
 import { animate, style, transition, trigger } from '@angular/animations';
 
 interface StatItem {
@@ -15,7 +15,7 @@ interface StatItem {
 @Component({
   selector: 'app-sustainability-stats',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, LucideAngularModule],
   templateUrl: './sustainability-stats.component.html',
   animations: [
     trigger('scaleIn', [
@@ -66,6 +66,7 @@ export class SustainabilityStatsComponent {
       change: 15,
     },
   ];
+  ArrowLeft = ArrowLeft;
 
   constructor(private router: Router) {}
 

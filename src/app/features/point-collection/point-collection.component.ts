@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-// import { IconsModule } from '../../core/modules/icons.module';
+import { ArrowLeft, LucideAngularModule } from 'lucide-angular';
 import {
   trigger,
   transition,
@@ -20,7 +20,7 @@ interface Reward {
 @Component({
   selector: 'app-point-collection',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, LucideAngularModule],
   templateUrl: './point-collection.component.html',
   animations: [
     trigger('listAnimation', [
@@ -54,6 +54,7 @@ export class PointCollectionComponent {
     { id: 2, name: '10% kedvezmény', points: 100 },
     { id: 3, name: 'Ajándék termék', points: 200 },
   ];
+  ArrowLeft = ArrowLeft;
 
   constructor(private router: Router) {}
 

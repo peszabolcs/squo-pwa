@@ -1,39 +1,242 @@
-<div class="w-full h-full flex flex-col">
+<div
+  class="w-full h-full flex flex-col bg-gradient-to-br from-[#f8fbfc] via-[#edf7f9] to-[#f9f3e8]"
+>
+  <style>
+    .scrollbar-none::-webkit-scrollbar {
+      display: none;
+    }
+
+    .bg-grid {
+      background-size: 30px 30px;
+      background-image: linear-gradient(
+          to right,
+          rgba(92, 225, 230, 0.05) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          to bottom,
+          rgba(92, 225, 230, 0.05) 1px,
+          transparent 1px
+        );
+    }
+
+    .bg-dots {
+      background-size: 20px 20px;
+      background-image: radial-gradient(
+        rgba(255, 192, 77, 0.15) 2px,
+        transparent 2px
+      );
+    }
+  </style>
+
   <div
-    class="bg-gradient-to-r from-primary-light to-secondary-light p-6 pt-12 rounded-b-[40px] shadow-lg relative overflow-hidden"
+    class="bg-gradient-to-r from-[#5ce1e6] to-[#ffc04d] p-6 pt-12 rounded-b-[40px] shadow-lg relative overflow-hidden"
   >
+    <!-- Background pattern -->
+    <div class="absolute inset-0 bg-grid opacity-20"></div>
+
+    <!-- Decorative circles -->
+    <div
+      class="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-white opacity-10"
+    ></div>
+    <div
+      class="absolute -bottom-20 -left-10 w-40 h-40 rounded-full bg-white opacity-10"
+    ></div>
+
     <div class="relative z-10">
       <div class="flex items-center gap-3">
-        <div class="bg-white/20 p-2 rounded-full"></div>
+        <div class="bg-white/20 p-2 rounded-full backdrop-blur-sm">
+          <mat-icon class="w-6 h-6 text-white">public</mat-icon>
+        </div>
         <h1 class="text-3xl font-bold text-white">SQUO</h1>
       </div>
       <p class="text-white opacity-90 mt-1 mb-4">Üdvözlünk az alkalmazásban!</p>
+
+      <!-- Stats row -->
+      <div class="grid grid-cols-3 gap-3 mb-4">
+        <div
+          class="bg-white/20 rounded-xl p-3 backdrop-blur-sm transition-transform duration-300 hover:scale-105"
+        >
+          <div class="flex items-center gap-2 mb-1">
+            <mat-icon class="w-4 h-4 text-white">water_drop</mat-icon>
+            <p class="text-xs text-white font-medium">Palackok</p>
+          </div>
+          <p class="text-xl font-bold text-white">{{ stats.bottles }} db</p>
+        </div>
+
+        <div
+          class="bg-white/20 rounded-xl p-3 backdrop-blur-sm transition-transform duration-300 hover:scale-105"
+        >
+          <div class="flex items-center gap-2 mb-1">
+            <mat-icon class="w-4 h-4 text-white">monetization_on</mat-icon>
+            <p class="text-xs text-white font-medium">Pontok</p>
+          </div>
+          <p class="text-xl font-bold text-white">{{ stats.points }}</p>
+        </div>
+
+        <div
+          class="bg-white/20 rounded-xl p-3 backdrop-blur-sm transition-transform duration-300 hover:scale-105"
+        >
+          <div class="flex items-center gap-2 mb-1">
+            <mat-icon class="w-4 h-4 text-white">eco</mat-icon>
+            <p class="text-xs text-white font-medium">CO2</p>
+          </div>
+          <p class="text-xl font-bold text-white">{{ stats.co2 }} kg</p>
+        </div>
+      </div>
+
+      <!-- Promo slider -->
+      <div
+        class="relative h-20 overflow-hidden rounded-xl bg-white/10 backdrop-blur-sm p-3"
+      >
+        <div
+          class="absolute inset-0 p-3 transition-all duration-300"
+          [ngClass]="{
+            'opacity-0 translate-y-4': activePromo !== 0,
+            'opacity-100 translate-y-0': activePromo === 0
+          }"
+        >
+          <div class="flex items-center gap-3">
+            <div
+              class="bg-gradient-to-br from-[#5ce1e6] to-[#4dabff] p-2 rounded-full"
+            >
+              <mat-icon class="w-6 h-6 text-white">card_giftcard</mat-icon>
+            </div>
+            <div>
+              <h3 class="text-sm font-bold text-white">
+                {{ promos[0].title }}
+              </h3>
+              <p class="text-xs text-white/80">{{ promos[0].description }}</p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="absolute inset-0 p-3 transition-all duration-300"
+          [ngClass]="{
+            'opacity-0 translate-y-4': activePromo !== 1,
+            'opacity-100 translate-y-0': activePromo === 1
+          }"
+        >
+          <div class="flex items-center gap-3">
+            <div
+              class="bg-gradient-to-br from-[#ffc04d] to-[#ff9a4d] p-2 rounded-full"
+            >
+              <mat-icon class="w-6 h-6 text-white">monetization_on</mat-icon>
+            </div>
+            <div>
+              <h3 class="text-sm font-bold text-white">
+                {{ promos[1].title }}
+              </h3>
+              <p class="text-xs text-white/80">{{ promos[1].description }}</p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="absolute inset-0 p-3 transition-all duration-300"
+          [ngClass]="{
+            'opacity-0 translate-y-4': activePromo !== 2,
+            'opacity-100 translate-y-0': activePromo === 2
+          }"
+        >
+          <div class="flex items-center gap-3">
+            <div
+              class="bg-gradient-to-br from-[#5ce1e6] to-[#ffc04d] p-2 rounded-full"
+            >
+              <mat-icon class="w-6 h-6 text-white">eco</mat-icon>
+            </div>
+            <div>
+              <h3 class="text-sm font-bold text-white">
+                {{ promos[2].title }}
+              </h3>
+              <p class="text-xs text-white/80">{{ promos[2].description }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Indicator dots -->
+        <div class="absolute bottom-2 right-2 flex gap-1">
+          <div
+            class="w-1.5 h-1.5 rounded-full"
+            [ngClass]="{
+              'bg-white': activePromo === 0,
+              'bg-white/40': activePromo !== 0
+            }"
+          ></div>
+          <div
+            class="w-1.5 h-1.5 rounded-full"
+            [ngClass]="{
+              'bg-white': activePromo === 1,
+              'bg-white/40': activePromo !== 1
+            }"
+          ></div>
+          <div
+            class="w-1.5 h-1.5 rounded-full"
+            [ngClass]="{
+              'bg-white': activePromo === 2,
+              'bg-white/40': activePromo !== 2
+            }"
+          ></div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="flex-1 p-6 overflow-auto scrollbar-none">
-    <h2 class="text-lg font-semibold mb-4">Főmenü</h2>
+  <div class="flex-1 p-6 overflow-auto scrollbar-none bg-dots">
+    <div class="max-w-6xl mx-auto">
+      <h2
+        class="text-lg font-semibold mb-6 text-gray-700 flex items-center gap-2"
+      >
+        <mat-icon class="w-4 h-4 text-[#5ce1e6]">trending_up</mat-icon>
+        Főmenü
+      </h2>
 
-    <div class="grid grid-cols-2 gap-4 p-4">
-      @for (item of menuItems; track item.id) {
-      <div class="relative group cursor-pointer" (click)="navigateTo(item)">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        @for (menuItem of menuItems; track menuItem.id) {
         <div
-          class="absolute inset-0 bg-gradient-to-r {{
-            item.gradient
-          }} rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"
-        ></div>
-        <div
-          class="relative p-6 bg-white rounded-lg leading-none flex items-top justify-between space-x-6"
+          class="relative group cursor-pointer transform transition-all duration-300 hover:scale-[1.02]"
+          (click)="navigateTo(menuItem)"
         >
-          <div class="space-y-2">
-            <h3 class="text-xl font-bold text-gray-900">{{ item.title }}</h3>
-          </div>
-          <div class="w-8 h-8">
-            <!-- Icon placeholder -->
+          <div
+            class="absolute inset-0 bg-gradient-to-r {{
+              menuItem.gradient
+            }} rounded-xl blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"
+          ></div>
+          <div
+            class="relative p-6 bg-white/90 backdrop-blur-sm rounded-xl leading-none flex flex-col space-y-4 shadow-sm hover:shadow-lg transition-shadow duration-300 border border-gray-100"
+          >
+            <div class="flex items-center justify-between">
+              <h3 class="text-xl font-bold text-gray-900">
+                {{ menuItem.title }}
+              </h3>
+              <div
+                class="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-br from-gray-50 to-gray-100 group-hover:{{
+                  menuItem.gradient
+                }} transition-colors duration-300 shadow-sm {{
+                  menuItem.color
+                }}"
+              >
+                <mat-icon class="w-6 h-6">{{ menuItem.icon }}</mat-icon>
+              </div>
+            </div>
+            <p
+              class="text-sm text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            >
+              {{ menuItem.description }}
+            </p>
           </div>
         </div>
+        }
       </div>
-      }
+
+      <!-- Decorative elements -->
+      <div class="mt-8 relative h-40">
+        <div
+          class="absolute bottom-0 right-0 w-40 h-40 rounded-full bg-[#5ce1e6]/5 -z-10"
+        ></div>
+        <div
+          class="absolute bottom-10 right-20 w-20 h-20 rounded-full bg-[#ffc04d]/5 -z-10"
+        ></div>
+      </div>
     </div>
   </div>
 </div>

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { ArrowLeft, LucideAngularModule } from 'lucide-angular';
 import {
   trigger,
   transition,
@@ -20,7 +21,7 @@ interface Location {
 @Component({
   selector: 'app-automatic-search',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, LucideAngularModule],
   templateUrl: './automatic-search.component.html',
   animations: [
     trigger('listAnimation', [
@@ -44,6 +45,7 @@ interface Location {
 })
 export class AutomaticSearchComponent {
   searchQuery = '';
+  ArrowLeft = ArrowLeft;
 
   locations: Location[] = [
     { id: 1, name: 'Budapest, Deák Ferenc tér', distance: '0.5 km' },

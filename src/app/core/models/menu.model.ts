@@ -1,7 +1,12 @@
+import { LucideAngularModule } from 'lucide-angular';
+
 export interface MenuItem {
   id: string;
   title: string;
+  description: string;
+  icon: string;
   gradient: string;
+  color: string;
 }
 
 export interface PromoItem {

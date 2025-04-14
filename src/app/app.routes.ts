@@ -1,24 +1,10 @@
 import { Routes } from '@angular/router';
+import { MainMenuComponent } from './features/main-menu/main-menu.component';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'main-menu',
-    pathMatch: 'full',
-  },
-  {
-    path: 'splash',
-    loadComponent: () =>
-      import('./features/splash-screen/splash-screen.component').then(
-        (m) => m.SplashScreenComponent
-      ),
-  },
-  {
-    path: 'main-menu',
-    loadComponent: () =>
-      import('./features/main-menu/main-menu.component').then(
-        (m) => m.MainMenuComponent
-      ),
+    component: MainMenuComponent,
   },
   {
     path: 'automatic-search',
