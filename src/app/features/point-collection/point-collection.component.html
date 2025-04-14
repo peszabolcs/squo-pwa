@@ -1,0 +1,68 @@
+<div class="w-full h-full flex flex-col">
+  <div
+    class="bg-gradient-to-r from-secondary-light to-secondary p-6 pt-12 flex items-center gap-4"
+  >
+    <button
+      class="text-white hover:bg-white/20 p-2 rounded-lg"
+      (click)="navigateBack()"
+    >
+      <!-- <lucide-icon name="arrow-left" [size]="24"></lucide-icon> -->
+    </button>
+    <h1 class="text-2xl font-bold text-white">Pontgyűjtés</h1>
+  </div>
+
+  <div class="p-6">
+    <div
+      class="bg-gradient-to-br from-primary-light to-secondary-light rounded-2xl p-6 text-white shadow-lg mb-6"
+      @scaleIn
+    >
+      <div class="flex items-center gap-3 mb-2">
+        <!-- <lucide-icon name="coins" [size]="24"></lucide-icon> -->
+        <h2 class="text-xl font-bold">Pontjaid</h2>
+      </div>
+      <p class="text-4xl font-bold mb-2">25</p>
+      <p class="text-sm opacity-80 mb-4">Következő szint: 50 pont</p>
+      <div class="h-2 bg-white/30 rounded-full overflow-hidden">
+        <div class="h-full bg-white w-1/2 rounded-full"></div>
+      </div>
+    </div>
+
+    <div class="mb-6">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-lg font-semibold">Jutalmak</h2>
+        <button class="text-primary-light hover:text-primary-light/80 text-sm">
+          Összes megtekintése
+        </button>
+      </div>
+
+      <div class="space-y-3" @listAnimation>
+        <div
+          *ngFor="let reward of rewards"
+          class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 flex justify-between items-center"
+        >
+          <div class="flex items-center gap-3">
+            <div
+              class="bg-gradient-to-br from-secondary-light to-secondary w-10 h-10 rounded-full flex items-center justify-center text-white"
+            >
+              <!-- <lucide-icon name="gift" [size]="18"></lucide-icon> -->
+            </div>
+            <div>
+              <p class="font-medium text-sm">{{ reward.name }}</p>
+              <p class="text-xs text-gray-500">{{ reward.points }} pont</p>
+            </div>
+          </div>
+          <button class="text-gray-400">
+            <!-- <lucide-icon name="chevron-right" [size]="18"></lucide-icon> -->
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <button
+      class="w-full py-6 bg-gradient-to-r from-secondary-light to-secondary text-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2"
+    >
+      <!-- <lucide-icon name="coins" [size]="18"></lucide-icon> -->
+      Pont beváltása
+    </button>
+  </div>
+</div>

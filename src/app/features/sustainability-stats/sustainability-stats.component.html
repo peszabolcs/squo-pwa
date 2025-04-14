@@ -1,0 +1,46 @@
+<div class="flex flex-col w-full h-full bg-white">
+  <div
+    class="w-full bg-gradient-to-r from-primary to-secondary p-4 text-white flex items-center gap-4"
+  >
+    <button
+      (click)="navigateBack()"
+      class="p-2 hover:bg-white/10 rounded-full transition-colors"
+    >
+      <!-- <lucide-icon name="chevron-left" [size]="24"></lucide-icon> -->
+    </button>
+    <h1 class="text-xl font-bold">Fenntarthatósági statisztikák</h1>
+  </div>
+
+  <div class="p-4 grid grid-cols-2 gap-4" @listAnimation>
+    <div
+      *ngFor="let stat of stats"
+      class="bg-gray-50 rounded-xl p-4 flex flex-col gap-2"
+      @scaleIn
+    >
+      <div class="flex items-center justify-between">
+        <div class="p-2 bg-primary/10 rounded-lg">
+          <!-- <lucide-icon
+            [name]="stat.icon"
+            [size]="24"
+            class="text-primary"
+          ></lucide-icon> -->
+        </div>
+        <div
+          class="flex items-center gap-1"
+          [class.text-green-500]="stat.change > 0"
+          [class.text-red-500]="stat.change < 0"
+        >
+          <!-- <lucide-icon
+            [name]="stat.change > 0 ? 'trending-up' : 'trending-down'"
+            [size]="16"
+          ></lucide-icon> -->
+          <span class="text-sm font-medium">{{ stat.change }}%</span>
+        </div>
+      </div>
+      <div class="flex flex-col gap-1">
+        <h3 class="text-sm text-gray-600">{{ stat.title }}</h3>
+        <p class="text-lg font-bold">{{ stat.value }}</p>
+      </div>
+    </div>
+  </div>
+</div>
