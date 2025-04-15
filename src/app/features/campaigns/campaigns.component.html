@@ -1,6 +1,6 @@
-<div class="w-full h-full flex flex-col">
+<div class="campaigns-container w-full h-full flex flex-col">
   <div
-    class="bg-gradient-to-r from-primary-light to-primary p-6 pt-12 flex items-center gap-4"
+    class="header-section bg-gradient-to-r from-primary-light to-primary p-6 pt-12 flex items-center gap-4"
   >
     <button
       class="text-white hover:bg-white/20 p-2 rounded-lg"
@@ -8,10 +8,97 @@
     >
       <mat-icon>arrow_back</mat-icon>
     </button>
-    <h1 class="text-2xl font-bold text-white">Kampányok</h1>
+    <h1 class="text-2xl font-bold text-white">Jutalmak & Akciók</h1>
   </div>
 
-  <div class="flex-1 p-6 overflow-auto">
-    <p>campaigns works!</p>
+  <div class="content-section flex-1 p-4 overflow-auto">
+    <h2 class="text-xl font-semibold mb-4 text-gray-800">Aktuális ajánlatok</h2>
+
+    <!-- Málna Ízű Kedvezmény -->
+    <div
+      class="campaign-card bg-gradient-to-r from-teal-400 to-blue-400 rounded-xl mb-4 overflow-hidden shadow-lg"
+    >
+      <div class="campaign-content p-5 text-white">
+        <h3 class="text-lg font-bold">Málna íz 20% kedvezmény</h3>
+        <div class="opacity-90 mt-2">
+          Limitált ideig minden málna ízű termékre 20% kedvezmény.
+        </div>
+        <div class="flex items-center mt-3 text-sm">
+          <mat-icon class="text-white mr-2">event</mat-icon>
+          <span>2023.10.15 - 2023.10.30</span>
+        </div>
+      </div>
+      <div class="bg-white flex justify-end p-3">
+        <button
+          class="text-blue-500 font-medium flex items-center"
+          (click)="showDetails('malna')"
+        >
+          Részletek <mat-icon>chevron_right</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <!-- Dupla pontok hétvégén -->
+    <div
+      class="campaign-card bg-gradient-to-r from-amber-400 to-orange-400 rounded-xl mb-4 overflow-hidden shadow-lg"
+    >
+      <div class="campaign-content p-5 text-white">
+        <h3 class="text-lg font-bold">Dupla pontok hétvégén</h3>
+        <div class="opacity-90 mt-2">
+          Minden hétvégi vásárlás után dupla pontot adunk.
+        </div>
+        <div class="flex items-center mt-3 text-sm">
+          <mat-icon class="text-white mr-2">event</mat-icon>
+          <span>Minden hétvégén</span>
+        </div>
+      </div>
+      <div class="bg-white flex justify-end p-3">
+        <button
+          class="text-orange-500 font-medium flex items-center"
+          (click)="showDetails('dupla')"
+        >
+          Részletek <mat-icon>chevron_right</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <!-- Környezetvédelmi nap -->
+    <div
+      class="campaign-card bg-gradient-to-r from-teal-300 to-yellow-400 rounded-xl mb-4 overflow-hidden shadow-lg"
+    >
+      <div class="campaign-content p-5 text-white">
+        <h3 class="text-lg font-bold">Környezetvédelmi nap</h3>
+        <div class="opacity-90 mt-2">
+          Hozz 5 PET palackot és kapsz egy ajándék italt.
+        </div>
+        <div class="flex items-center mt-3 text-sm">
+          <mat-icon class="text-white mr-2">event</mat-icon>
+          <span>2023.11.05</span>
+        </div>
+      </div>
+      <div class="bg-white flex justify-end p-3">
+        <button
+          class="text-teal-500 font-medium flex items-center"
+          (click)="showDetails('kornyezet')"
+        >
+          Részletek <mat-icon>chevron_right</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <!-- Következő kampány előzetes -->
+    <div
+      class="next-campaign bg-gray-50 border border-gray-200 rounded-xl p-5 mt-8"
+    >
+      <div class="flex items-center">
+        <div class="bg-amber-100 rounded-full p-2 mr-3 pulse-animation">
+          <mat-icon class="text-amber-500">celebration</mat-icon>
+        </div>
+        <h3 class="text-lg font-bold">Következő kampány</h3>
+      </div>
+      <p class="text-gray-600 mt-2">
+        Hamarosan új, izgalmas kampányokkal jelentkezünk.
+      </p>
+    </div>
   </div>
 </div>

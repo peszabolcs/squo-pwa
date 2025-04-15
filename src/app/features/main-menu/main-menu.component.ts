@@ -62,8 +62,8 @@ export class MainMenuComponent implements OnInit {
     },
     {
       id: 'campaigns',
-      title: 'Kampányok',
-      description: 'Fedezd fel az aktuális kampányokat',
+      title: 'Jutalmak és akciók',
+      description: 'Fedezd fel a legújabb jutalmakat és akciókat',
       icon: 'card_giftcard',
       gradient: 'from-[#5ce1e6] to-[#4dabff]',
       color: 'text-[#5ce1e6]',
