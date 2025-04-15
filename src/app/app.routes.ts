@@ -1,10 +1,12 @@
 import { Routes } from '@angular/router';
-import { MainMenuComponent } from './features/main-menu/main-menu.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: MainMenuComponent,
+    loadComponent: () =>
+      import('./features/main-menu/main-menu.component').then(
+        (m) => m.MainMenuComponent
+      ),
   },
   {
     path: 'automatic-search',
