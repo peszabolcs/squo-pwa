@@ -31,17 +31,34 @@
           <mat-icon class="text-primary-light">place</mat-icon>
           <span class="text-sm font-medium">Jelenlegi helyzeted</span>
         </div>
-        <span class="text-xs text-gray-500">Budapest, Magyarország</span>
+        <span class="text-xs text-gray-500"
+          >{{ center.lat.toFixed(4) }}, {{ center.lng.toFixed(4) }}</span
+        >
       </div>
     </div>
 
     <div class="h-[400px] bg-gray-100 rounded-xl mb-4 overflow-hidden relative">
-      <div
-        class="absolute inset-0 bg-gradient-to-br from-primary-light/20 to-secondary-light/20"
-      ></div>
-      <div class="absolute inset-0 flex items-center justify-center">
-        <p class="text-gray-400">Térkép betöltése...</p>
-      </div>
+      <google-map
+        height="100%"
+        width="100%"
+        [center]="center"
+        [zoom]="zoom"
+        [options]="mapOptions"
+      >
+        <map-marker
+          *ngFor="let location of locations"
+          [position]="location.position!"
+          [options]="markerOptions"
+          [title]="location.name"
+        >
+        </map-marker>
+        <map-marker
+          [position]="center"
+          [options]="myLocationMarkerOptions"
+          title="Az én pozícióm"
+        >
+        </map-marker>
+      </google-map>
     </div>
 
     <h2 class="font-semibold mb-2">Közeli automaták</h2>
