@@ -9,7 +9,12 @@ import { MatIconModule } from '@angular/material/icon';
   standalone: true,
   imports: [CommonModule, RouterModule, MatIconModule],
   templateUrl: './main-menu.component.html',
-  styleUrls: ['./main-menu.component.css']
+  styleUrls: ['./main-menu.component.css'],
+  host: {
+    class: 'block w-full h-full',
+    '[style.background-image]': 'getBackgroundImage()',
+    '[style.background-size]': "'20px 20px'",
+  },
 })
 export class MainMenuComponent implements OnInit {
   activePromo = 0;
@@ -115,5 +120,9 @@ export class MainMenuComponent implements OnInit {
 
   navigateTo(menuItem: MenuItem) {
     this.router.navigate([`/${menuItem.id}`]);
+  }
+
+  getBackgroundImage(): string {
+    return 'url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9IiNlNmU2ZTYiIGZpbGwtb3BhY2l0eT0iMC44Ii8+PC9zdmc+")';
   }
 }
