@@ -6,7 +6,7 @@
       (click)="navigateBack()"
       class="p-2 hover:bg-white/10 rounded-full transition-colors"
     >
-      <lucide-icon [name]="ArrowLeft" [size]="24"></lucide-icon>
+      <mat-icon>arrow_back</mat-icon>
     </button>
     <h1 class="text-xl font-bold">Fenntarthatósági statisztikák</h1>
   </div>
@@ -19,21 +19,19 @@
     >
       <div class="flex items-center justify-between">
         <div class="p-2 bg-primary/10 rounded-lg">
-          <!-- <lucide-icon
-            [name]="stat.icon"
-            [size]="24"
-            class="text-primary"
-          ></lucide-icon> -->
+          <mat-icon class="text-primary">{{ stat.icon }}</mat-icon>
         </div>
         <div
           class="flex items-center gap-1"
           [class.text-green-500]="stat.change > 0"
           [class.text-red-500]="stat.change < 0"
         >
-          <!-- <lucide-icon
-            [name]="stat.change > 0 ? 'trending-up' : 'trending-down'"
-            [size]="16"
-          ></lucide-icon> -->
+          <mat-icon *ngIf="stat.change > 0" class="text-sm"
+            >trending_up</mat-icon
+          >
+          <mat-icon *ngIf="stat.change < 0" class="text-sm"
+            >trending_down</mat-icon
+          >
           <span class="text-sm font-medium">{{ stat.change }}%</span>
         </div>
       </div>

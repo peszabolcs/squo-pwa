@@ -6,7 +6,7 @@
       class="text-white hover:bg-white/20 p-2 rounded-lg"
       (click)="navigateBack()"
     >
-      <lucide-icon [name]="ArrowLeft" [size]="24"></lucide-icon>
+      <mat-icon>arrow_back</mat-icon>
     </button>
     <h1 class="text-2xl font-bold text-white">Automata kereső</h1>
   </div>
@@ -19,21 +19,16 @@
         [(ngModel)]="searchQuery"
         class="w-full pl-10 py-6 rounded-xl border-gray-200 bg-white shadow-sm"
       />
-      <!-- <lucide-icon
-        name="search"
-        [size]="18"
+      <mat-icon
         class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
-      ></lucide-icon> -->
+        >search</mat-icon
+      >
     </div>
 
     <div class="bg-primary-light/10 rounded-xl p-4 mb-4">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-2">
-          <!-- <lucide-icon
-            name="map-pin"
-            [size]="18"
-            class="text-primary-light"
-          ></lucide-icon> -->
+          <mat-icon class="text-primary-light">place</mat-icon>
           <span class="text-sm font-medium">Jelenlegi helyzeted</span>
         </div>
         <span class="text-xs text-gray-500">Budapest, Magyarország</span>
@@ -59,7 +54,7 @@
           <div
             class="bg-gradient-to-br from-primary-light to-primary w-10 h-10 rounded-full flex items-center justify-center text-white"
           >
-            <!-- <lucide-icon name="map-pin" [size]="18"></lucide-icon> -->
+            <mat-icon>place</mat-icon>
           </div>
           <span class="font-medium text-sm">{{ location.name }}</span>
         </div>

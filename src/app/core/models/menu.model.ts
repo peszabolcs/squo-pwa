@@ -1,5 +1,3 @@
-import { LucideAngularModule } from 'lucide-angular';
-
 export interface MenuItem {
   id: string;
   title: string;

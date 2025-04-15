@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location as NgLocation } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { ArrowLeft, LucideAngularModule } from 'lucide-angular';
+import { MatIconModule } from '@angular/material/icon';
 import {
   trigger,
   transition,
@@ -21,7 +21,7 @@ interface Location {
 @Component({
   selector: 'app-automatic-search',
   standalone: true,
-  imports: [CommonModule, FormsModule, LucideAngularModule],
+  imports: [CommonModule, FormsModule, MatIconModule],
   templateUrl: './automatic-search.component.html',
   animations: [
     trigger('listAnimation', [
@@ -45,7 +45,6 @@ interface Location {
 })
 export class AutomaticSearchComponent {
   searchQuery = '';
-  ArrowLeft = ArrowLeft;
 
   locations: Location[] = [
     { id: 1, name: 'Budapest, Deák Ferenc tér', distance: '0.5 km' },
@@ -55,9 +54,9 @@ export class AutomaticSearchComponent {
     { id: 5, name: 'Debrecen, Nagytemplom', distance: '230 km' },
   ];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private location: NgLocation) {}
 
   navigateBack() {
-    this.router.navigate(['/main-menu']);
+    this.location.back();
   }
 }

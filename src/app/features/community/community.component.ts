@@ -1,21 +1,19 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { ArrowLeft, LucideAngularModule } from 'lucide-angular';
+import { CommonModule, Location } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-community',
   standalone: true,
-  imports: [CommonModule, LucideAngularModule],
+  imports: [CommonModule, MatIconModule],
   templateUrl: './community.component.html',
   styleUrl: './community.component.css',
 })
 export class CommunityComponent {
-  ArrowLeft = ArrowLeft;
-
-  constructor(private router: Router) {}
+  constructor(private router: Router, private location: Location) {}
 
   navigateBack() {
-    this.router.navigate(['/main-menu']);
+    this.location.back();
   }
 }

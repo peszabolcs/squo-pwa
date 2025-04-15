@@ -6,12 +6,205 @@
       class="text-white hover:bg-white/20 p-2 rounded-lg"
       (click)="navigateBack()"
     >
-      <lucide-icon [name]="ArrowLeft" [size]="24"></lucide-icon>
+      <mat-icon>arrow_back</mat-icon>
     </button>
-    <h1 class="text-2xl font-bold text-white">Admin</h1>
+    <h1 class="text-2xl font-bold text-white">Admin felület</h1>
+    <div class="flex-grow"></div>
+    <button
+      class="text-white hover:bg-white/20 p-2 rounded-lg"
+      (click)="refresh()"
+    >
+      <mat-icon>refresh</mat-icon>
+    </button>
   </div>
 
-  <div class="p-6">
-    <p>admin works!</p>
+  <div class="p-6 bg-gray-100 flex-1 overflow-auto">
+    <!-- Rendszer állapot áttekintés -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+      <h2 class="text-xl font-semibold mb-4 text-gray-800">Rendszer állapot</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Aktív automaták -->
+        <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+          <div class="flex items-center gap-3">
+            <div class="p-3 bg-blue-100 rounded-lg">
+              <mat-icon class="text-blue-600">developer_board</mat-icon>
+            </div>
+            <div>
+              <h3 class="text-sm font-medium text-gray-500">Aktív automaták</h3>
+              <p class="text-2xl font-bold text-gray-800">
+                {{ systemStatus.activeAutomatas }} /
+                {{ systemStatus.totalAutomatas }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Átlagos készletszint -->
+        <div class="bg-green-50 p-4 rounded-lg border border-green-200">
+          <div class="flex items-center gap-3">
+            <div class="p-3 bg-green-100 rounded-lg">
+              <mat-icon class="text-green-600">local_drink</mat-icon>
+            </div>
+            <div>
+              <h3 class="text-sm font-medium text-gray-500">
+                Átlagos készletszint
+              </h3>
+              <p class="text-2xl font-bold text-gray-800">
+                {{ systemStatus.averageStockLevel }}%
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Következő karbantartás -->
+        <div class="bg-purple-50 p-4 rounded-lg border border-purple-200">
+          <div class="flex items-center gap-3">
+            <div class="p-3 bg-purple-100 rounded-lg">
+              <mat-icon class="text-purple-600">build</mat-icon>
+            </div>
+            <div>
+              <h3 class="text-sm font-medium text-gray-500">
+                Következő karbantartás
+              </h3>
+              <p class="text-lg font-bold text-gray-800">2023.10.15</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Automaták listája -->
+    <div class="bg-white rounded-lg shadow-md p-6">
+      <h2 class="text-xl font-semibold mb-4 text-gray-800">
+        Automaták állapota
+      </h2>
+
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th
+                scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Helyszín
+              </th>
+              <th
+                scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Készletszint
+              </th>
+              <th
+                scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Utolsó karbantartás
+              </th>
+              <th
+                scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Állapot
+              </th>
+              <th
+                scope="col"
+                class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Műveletek
+              </th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <tr *ngFor="let automata of automatas" class="hover:bg-gray-50">
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm font-medium text-gray-900">
+                  {{ automata.location }}
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center">
+                  <div
+                    class="relative w-24 h-2 bg-gray-200 rounded-full overflow-hidden"
+                  >
+                    <div
+                      class="absolute top-0 left-0 h-full rounded-full"
+                      [ngClass]="{
+                        'bg-red-500': automata.stockLevel < 30,
+                        'bg-yellow-500':
+                          automata.stockLevel >= 30 && automata.stockLevel < 70,
+                        'bg-green-500': automata.stockLevel >= 70
+                      }"
+                      [style.width.%]="automata.stockLevel"
+                    ></div>
+                  </div>
+                  <span class="ml-2 text-sm text-gray-600"
+                    >{{ automata.stockLevel }}%</span
+                  >
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-500">
+                  {{ automata.lastMaintenance }}
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span
+                  class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full"
+                  [ngClass]="{
+                    'bg-green-100 text-green-800':
+                      automata.status === 'működik',
+                    'bg-yellow-100 text-yellow-800':
+                      automata.status === 'figyelmeztetés',
+                    'bg-red-100 text-red-800': automata.status === 'hiba'
+                  }"
+                >
+                  {{ automata.status }}
+                </span>
+              </td>
+              <td
+                class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+              >
+                <button
+                  class="text-primary hover:text-primary-dark"
+                  (click)="showDetails(automata.location)"
+                >
+                  Részletek
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Figyelmeztetések -->
+    <div class="bg-white rounded-lg shadow-md p-6 mt-6">
+      <h2 class="text-xl font-semibold mb-4 text-gray-800">Figyelmeztetések</h2>
+
+      <div class="border border-yellow-200 bg-yellow-50 rounded-lg p-4 mb-4">
+        <div class="flex items-start">
+          <div class="flex-shrink-0">
+            <mat-icon class="text-yellow-500">warning</mat-icon>
+          </div>
+          <div class="ml-3">
+            <h3 class="text-sm font-medium text-yellow-800">
+              Karbantartás esedékes
+            </h3>
+            <div class="mt-2 text-sm text-yellow-700">
+              <p>
+                Budapest, Keleti pályaudvar automata karbantartása esedékes.
+                Utolsó karbantartás: 2023.09.20
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nincs több figyelmeztetés üzenet -->
+      <div class="text-center text-gray-500 text-sm mt-4">
+        Nincs több figyelmeztetés.
+      </div>
+    </div>
   </div>
 </div>

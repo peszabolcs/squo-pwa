@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ArrowLeft, LucideAngularModule } from 'lucide-angular';
+import { MatIconModule } from '@angular/material/icon';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { Location } from '@angular/common';
 
 interface StatItem {
   id: number;
@@ -15,7 +16,7 @@ interface StatItem {
 @Component({
   selector: 'app-sustainability-stats',
   standalone: true,
-  imports: [CommonModule, LucideAngularModule],
+  imports: [CommonModule, MatIconModule],
   templateUrl: './sustainability-stats.component.html',
   animations: [
     trigger('scaleIn', [
@@ -41,7 +42,7 @@ export class SustainabilityStatsComponent {
       id: 1,
       title: 'CO2 megtakarítás',
       value: '125 kg',
-      icon: 'leaf',
+      icon: 'eco',
       change: 12,
     },
     {
@@ -55,22 +56,21 @@ export class SustainabilityStatsComponent {
       id: 3,
       title: 'Megtakarított üzemanyag',
       value: '45 l',
-      icon: 'fuel',
+      icon: 'local_gas_station',
       change: -5,
     },
     {
       id: 4,
       title: 'Közösségi utazások',
       value: '24 db',
-      icon: 'users',
+      icon: 'groups',
       change: 15,
     },
   ];
-  ArrowLeft = ArrowLeft;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private location: Location) {}
 
   navigateBack(): void {
-    this.router.navigate(['/main-menu']);
+    this.location.back();
   }
 }

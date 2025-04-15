@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Router } from '@angular/router';
-import { ArrowLeft, LucideAngularModule } from 'lucide-angular';
+import { MatIconModule } from '@angular/material/icon';
 import {
   trigger,
   transition,
@@ -20,7 +20,7 @@ interface Reward {
 @Component({
   selector: 'app-point-collection',
   standalone: true,
-  imports: [CommonModule, LucideAngularModule],
+  imports: [CommonModule, MatIconModule],
   templateUrl: './point-collection.component.html',
   animations: [
     trigger('listAnimation', [
@@ -54,11 +54,10 @@ export class PointCollectionComponent {
     { id: 2, name: '10% kedvezmény', points: 100 },
     { id: 3, name: 'Ajándék termék', points: 200 },
   ];
-  ArrowLeft = ArrowLeft;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private location: Location) {}
 
   navigateBack() {
-    this.router.navigate(['/main-menu']);
+    this.location.back();
   }
 }
