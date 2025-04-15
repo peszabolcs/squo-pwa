@@ -1,0 +1,30 @@
+.stat-card {
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.activity-bar {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.activity-bar:hover {
+  transform: scaleY(1.1);
+  background-color: var(--secondary-color) !important;
+}
+
+.progress-bar {
+  transition: width 1s ease-in-out;
+}
+
+.icon-container {
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover .icon-container {
+  transform: scale(1.1);
+}

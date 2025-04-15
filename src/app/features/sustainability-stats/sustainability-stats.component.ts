@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { animate, style, transition, trigger } from '@angular/animations';
@@ -36,7 +36,7 @@ interface StatItem {
     ]),
   ],
 })
-export class SustainabilityStatsComponent {
+export class SustainabilityStatsComponent implements OnInit {
   stats: StatItem[] = [
     {
       id: 1,
@@ -68,7 +68,23 @@ export class SustainabilityStatsComponent {
     },
   ];
 
-  constructor(private router: Router, private location: Location) {}
+  currentMonth = new Date().getMonth() + 1;
+  monthlyHeights: number[] = [];
+
+  constructor(private router: Router, private location: Location) {
+    // Initialize monthly heights with random values
+    this.monthlyHeights = Array(12)
+      .fill(0)
+      .map(() => Math.floor(Math.random() * 80) + 20);
+  }
+
+  ngOnInit() {
+    // No need to generate random values here anymore
+  }
+
+  getHeight(monthIndex: number): number {
+    return this.monthlyHeights[monthIndex];
+  }
 
   navigateBack(): void {
     this.location.back();
