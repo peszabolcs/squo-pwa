@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
   standalone: true,
   imports: [CommonModule, RouterModule, MatIconModule],
   templateUrl: './main-menu.component.html',
+  styleUrls: ['./main-menu.component.css']
 })
 export class MainMenuComponent implements OnInit {
   activePromo = 0;
