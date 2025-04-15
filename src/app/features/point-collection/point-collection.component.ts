@@ -15,6 +15,7 @@ interface Reward {
   id: number;
   name: string;
   points: number;
+  icon: string;
 }
 
 @Component({
@@ -50,9 +51,9 @@ interface Reward {
 })
 export class PointCollectionComponent {
   rewards: Reward[] = [
-    { id: 1, name: 'Ingyenes ital', points: 50 },
-    { id: 2, name: '10% kedvezmény', points: 100 },
-    { id: 3, name: 'Ajándék termék', points: 200 },
+    { id: 1, name: 'Ingyenes ital', points: 50, icon: 'local_cafe' },
+    { id: 2, name: '10% kedvezmény', points: 100, icon: 'percent' },
+    { id: 3, name: 'Ajándék termék', points: 200, icon: 'card_giftcard' },
   ];
 
   constructor(private router: Router, private location: Location) {}

@@ -1,9 +1,9 @@
-<div class="w-full h-full flex flex-col">
+<div class="w-full h-full flex flex-col bg-gray-50 overflow-hidden">
   <div
     class="bg-gradient-to-r from-secondary-light to-secondary p-6 pt-12 flex items-center gap-4"
   >
     <button
-      class="text-white hover:bg-white/20 p-2 rounded-lg"
+      class="text-white hover:bg-white/20 p-2 rounded-lg transition-all"
       (click)="navigateBack()"
     >
       <mat-icon>arrow_back</mat-icon>
@@ -11,58 +11,140 @@
     <h1 class="text-2xl font-bold text-white">Pontgyűjtés</h1>
   </div>
 
-  <div class="p-6">
+  <div class="p-6 space-y-6">
+    <!-- Points Overview Card -->
     <div
-      class="bg-gradient-to-br from-primary-light to-secondary-light rounded-2xl p-6 text-white shadow-lg mb-6"
+      class="relative bg-gradient-to-br from-primary-light to-secondary-light rounded-3xl p-8 text-white shadow-xl overflow-hidden"
       @scaleIn
     >
-      <div class="flex items-center gap-3 mb-2">
-        <mat-icon>toll</mat-icon>
-        <h2 class="text-xl font-bold">Pontjaid</h2>
-      </div>
-      <p class="text-4xl font-bold mb-2">25</p>
-      <p class="text-sm opacity-80 mb-4">Következő szint: 50 pont</p>
-      <div class="h-2 bg-white/30 rounded-full overflow-hidden">
-        <div class="h-full bg-white w-1/2 rounded-full"></div>
-      </div>
-    </div>
+      <!-- Decorative circles - adjusted positioning -->
+      <div
+        class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-16 translate-x-16"
+      ></div>
+      <div
+        class="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full translate-y-12 -translate-x-12"
+      ></div>
 
-    <div class="mb-6">
-      <div class="flex items-center justify-between mb-4">
-        <h2 class="text-lg font-semibold">Jutalmak</h2>
-        <button class="text-primary-light hover:text-primary-light/80 text-sm">
-          Összes megtekintése
-        </button>
-      </div>
+      <div class="relative z-10">
+        <div class="flex items-center gap-3 mb-2">
+          <mat-icon>stars</mat-icon>
+          <h2 class="text-xl font-bold">Pontjaid</h2>
+        </div>
+        <p class="text-5xl font-bold mb-2">25</p>
+        <p class="text-sm opacity-80">Következő szint: 50 pont</p>
 
-      <div class="space-y-3" @listAnimation>
-        <div
-          *ngFor="let reward of rewards"
-          class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 flex justify-between items-center"
-        >
-          <div class="flex items-center gap-3">
-            <div
-              class="bg-gradient-to-br from-secondary-light to-secondary w-10 h-10 rounded-full flex items-center justify-center text-white"
-            >
-              <mat-icon>card_giftcard</mat-icon>
-            </div>
-            <div>
-              <p class="font-medium text-sm">{{ reward.name }}</p>
-              <p class="text-xs text-gray-500">{{ reward.points }} pont</p>
-            </div>
-          </div>
-          <button class="text-gray-400">
-            <mat-icon>chevron_right</mat-icon>
-          </button>
+        <div class="h-2 bg-white/30 rounded-full overflow-hidden mt-4">
+          <div
+            class="h-full bg-white w-1/2 rounded-full transition-all duration-1000"
+          ></div>
         </div>
       </div>
     </div>
 
+    <!-- Rewards Section -->
+    <div class="space-y-4">
+      <div class="flex items-center justify-between">
+        <h2 class="text-lg font-semibold">Jutalmak</h2>
+        <button
+          class="text-primary-light hover:text-primary-light/80 text-sm font-medium flex items-center gap-1 transition-colors"
+        >
+          <span>Összes megtekintése</span>
+          <mat-icon class="text-sm">arrow_forward</mat-icon>
+        </button>
+      </div>
+
+      <div class="grid gap-4" @listAnimation>
+        <!-- Ingyenes ital -->
+        <div
+          class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-all cursor-pointer transform hover:-translate-y-1"
+        >
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4">
+              <div
+                class="bg-gradient-to-br from-secondary-light to-secondary w-12 h-12 rounded-xl flex items-center justify-center text-white"
+              >
+                <mat-icon>local_cafe</mat-icon>
+              </div>
+              <div>
+                <p class="font-semibold text-gray-800">Ingyenes ital</p>
+                <div class="flex items-center gap-2 mt-1">
+                  <mat-icon class="text-amber-500 text-sm">stars</mat-icon>
+                  <p class="text-sm text-gray-500">50 pont</p>
+                </div>
+              </div>
+            </div>
+            <button
+              class="text-gray-400 hover:text-secondary-light transition-colors"
+            >
+              <mat-icon>chevron_right</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <!-- 10% kedvezmény -->
+        <div
+          class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-all cursor-pointer transform hover:-translate-y-1"
+        >
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4">
+              <div
+                class="bg-gradient-to-br from-secondary-light to-secondary w-12 h-12 rounded-xl flex items-center justify-center text-white"
+              >
+                <mat-icon>percent</mat-icon>
+              </div>
+              <div>
+                <p class="font-semibold text-gray-800">10% kedvezmény</p>
+                <div class="flex items-center gap-2 mt-1">
+                  <mat-icon class="text-amber-500 text-sm">stars</mat-icon>
+                  <p class="text-sm text-gray-500">100 pont</p>
+                </div>
+              </div>
+            </div>
+            <button
+              class="text-gray-400 hover:text-secondary-light transition-colors"
+            >
+              <mat-icon>chevron_right</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <!-- Ajándék termék -->
+        <div
+          class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-all cursor-pointer transform hover:-translate-y-1"
+        >
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4">
+              <div
+                class="bg-gradient-to-br from-secondary-light to-secondary w-12 h-12 rounded-xl flex items-center justify-center text-white"
+              >
+                <mat-icon>card_giftcard</mat-icon>
+              </div>
+              <div>
+                <p class="font-semibold text-gray-800">Ajándék termék</p>
+                <div class="flex items-center gap-2 mt-1">
+                  <mat-icon class="text-amber-500 text-sm">stars</mat-icon>
+                  <p class="text-sm text-gray-500">200 pont</p>
+                </div>
+              </div>
+            </div>
+            <button
+              class="text-gray-400 hover:text-secondary-light transition-colors"
+            >
+              <mat-icon>chevron_right</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Button -->
     <button
-      class="w-full py-6 bg-gradient-to-r from-secondary-light to-secondary text-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2"
+      class="w-full py-4 bg-gradient-to-r from-secondary-light to-secondary text-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-3 group"
     >
-      <mat-icon>toll</mat-icon>
-      Pont beváltása
+      <mat-icon class="group-hover:rotate-12 transition-transform"
+        >redeem</mat-icon
+      >
+      <span class="font-semibold">Pont beváltása</span>
     </button>
   </div>
 </div>
